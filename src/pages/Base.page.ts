@@ -1,7 +1,7 @@
-import {Page, Locator} from '@playwright/test';
+import { Page, Locator } from '@playwright/test';
 
 export class Base {
-protected page: Page;
+  protected page: Page;
 
   optionByName(optionText: string): Locator {
     return this.page.getByRole('option', { name: optionText });
@@ -12,6 +12,10 @@ protected page: Page;
 
   getLocatorByPartialId(id: string): Locator {
     return this.page.locator(`[id*="${id}"]`);
+  }
+
+  getLocatorByDatatest(id: string): Locator {
+    return this.page.locator(`[data-test="${id}"]`);
   }
 
   checkboxGetByRole(grade: string): Locator {
