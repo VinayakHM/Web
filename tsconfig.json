@@ -1,0 +1,25 @@
+{
+  "compilerOptions": {
+    "lib": ["ES2023", "DOM"],
+    "module": "Node16",
+    "target": "ES2022",
+    "strict": true,
+    "esModuleInterop": true /*This is for "path" module import*/,
+    "skipDefaultLibCheck": true,
+    "forceConsistentCasingInFileNames": true,
+    "moduleResolution": "Node16",
+    "baseUrl": "." /* Specify the base directory to resolve non-relative module names. */,
+    "resolveJsonModule": true,
+    "sourceMap": true,
+    "paths": {
+      /* Specify a set of entries that re-map imports to additional lookup locations. */
+      "@pages/*": ["src/pages/*"],
+      "@fixtures/*": ["src/fixtures/*"],
+      "@constants/*": ["src/utils/constants/*"],
+      "@gql/*": ["src/utils/gql/*"],
+      "@userData": ["playwright/.auth/*"],
+      "@views/*": ["src/pages/views/*"],
+      "@testData/*":["src/testdata/*"],
+    }
+  }
+}
