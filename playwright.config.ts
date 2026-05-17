@@ -1,4 +1,5 @@
 import { defineConfig, devices } from '@playwright/test';
+import {constants} from './src/utils/constants/HelperConstants';
 
 /**
  * Read environment variables from file.
@@ -11,6 +12,8 @@ import { defineConfig, devices } from '@playwright/test';
 /**
  * See https://playwright.dev/docs/test-configuration.
  */
+global.BASE_URL = constants.URLs.dev.saucedemo;
+
 export default defineConfig({
   testDir: './src/tests',
   /* Run tests in files in parallel */
@@ -23,8 +26,14 @@ export default defineConfig({
   workers: process.env.CI ? 1 : undefined,
   /* Reporter to use. See https://playwright.dev/docs/test-reporters */
   reporter: 'html',
+  expect: {
+    timeout: 30000,
+  },
+  timeout: 180000,
   /* Shared settings for all the projects below. See https://playwright.dev/docs/api/class-testoptions. */
   use: {
+    navigationTimeout: 120000,
+    actionTimeout: 30000,
     /* Base URL to use in actions like `await page.goto('')`. */
     // baseURL: 'http://localhost:3000',
 

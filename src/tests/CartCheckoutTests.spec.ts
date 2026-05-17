@@ -5,28 +5,24 @@ import productsData from '@testData/products.json';
 import checkoutData from '@testData/checkout.json';
 
 test.describe('E2E Test', () => {
-  test.beforeEach(async ({ page }) => {
+  test.beforeEach(async ({ page, login }) => {
     await page.goto(BASE_URL);
+    await login.enterUsernameField(loginData.validuser.username);
+    await login.enterPasswordField(loginData.validuser.password);
+    await login.clickOnLoginButton();
   });
-  test('E2E', async ({
-    login,
+
+  test('Complete Checkout Flow', async ({
     productCatalog,
     cart,
     checkout,
     checkoutOverview,
     checkOutSuccess,
-    page,
   }) => {
-    await login.enterUsernameField(loginData.validuser.username);
-    await login.enterPasswordField(loginData.validuser.password);
-    await login.clickOnLoginButton();
     await expect(productCatalog.productListTitle).toBeVisible();
     await productCatalog.addProductsToCart(
       productsData.testScenarios.addThreeProducts,
     );
-    await expect(
-      page.locator('[data-test="shopping-cart-link"]'),
-    ).toContainText('3');
     await productCatalog.clickOnCartLink();
     await cart.assertProductsInCart(
       productsData.testScenarios.addThreeProducts,
@@ -39,5 +35,25 @@ test.describe('E2E Test', () => {
     await checkoutOverview.clickOnFinishButton();
     await checkOutSuccess.checkThankYouMessage();
     await checkOutSuccess.clickOnContinueShoppingButton();
+  });
+
+  test('Checkout Form Validation Errors', async ({
+    productCatalog,
+    cart,
+    checkout,
+  }) => {
+    await expect(productCatalog.productListTitle).toBeVisible();
+    await productCatalog.addProductsToCart(
+      productsData.testScenarios.addThreeProducts,
+    );
+    await productCatalog.clickOnCartLink();
+    await cart.assertProductsInCart(
+      productsData.testScenarios.addThreeProducts,
+    );
+    await cart.clickOnCheckoutButton();
+    await checkout.clickOnContinueButton();
+    await expect(checkout.errorMessage).toContainText(
+      checkoutData.errorMessages.firstNameRequired,
+    );
   });
 });

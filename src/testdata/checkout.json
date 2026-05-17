@@ -1,0 +1,15 @@
+{
+  "validCheckoutUser": {
+    "firstName": "Vinayak",
+    "lastName": "M",
+    "postalCode": "560066"
+  },
+  "invalidCheckout": {
+    "firstName": "",
+    "lastName": "",
+    "postalCode": ""
+  },
+  "errorMessages": {
+    "firstNameRequired": "Error: First Name is required"
+  }
+}

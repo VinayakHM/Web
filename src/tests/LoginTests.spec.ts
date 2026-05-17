@@ -1,22 +1,23 @@
 import test from '@fixtures/BaseTest';
 import { expect } from '@playwright/test';
+import loginData from '@testData/login.json';
 
 test.describe('Login Tests', () => {
   test.beforeEach(async ({ page }) => {
-    await page.goto('https://www.saucedemo.com/');
+    await page.goto(BASE_URL);
   });
 
-  test('Valid Login', async ({ login, page, productCatalog }) => {
-    await login.enterUsernameField('standard_user');
-    await login.enterPasswordField('secret_sauce');
-    await login.clickOnLoginButton();
+  test('Valid Login', async ({ login: loginPage, page, productCatalog }) => {
+    await loginPage.enterUsernameField(loginData.validuser.username);
+    await loginPage.enterPasswordField(loginData.validuser.password);
+    await loginPage.clickOnLoginButton();
     await expect(productCatalog.productListTitle).toBeVisible();
   });
 
-  test('Invalid Login', async ({ login }) => {
-    await login.enterUsernameField('vinayak');
-    await login.enterPasswordField('vinayak@123');
-    await login.clickOnLoginButton();
-    await login.assertInvalidCredentialErrorMessage();
+  test('Invalid Login', async ({ login: loginPage }) => {
+    await loginPage.enterUsernameField(loginData.invaliduser.username);
+    await loginPage.enterPasswordField(loginData.invaliduser.password);
+    await loginPage.clickOnLoginButton();
+    await loginPage.assertInvalidCredentialErrorMessage();
   });
 });

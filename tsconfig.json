@@ -1,5 +1,6 @@
 {
   "compilerOptions": {
+    "ignoreDeprecations": "6.0",
     "lib": ["ES2023", "DOM"],
     "module": "Node16",
     "target": "ES2022",
@@ -8,6 +9,7 @@
     "skipDefaultLibCheck": true,
     "forceConsistentCasingInFileNames": true,
     "moduleResolution": "Node16",
+    "types": ["node"],
     "baseUrl": "." /* Specify the base directory to resolve non-relative module names. */,
     "resolveJsonModule": true,
     "sourceMap": true,

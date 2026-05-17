@@ -1,30 +1,23 @@
 import test from '@fixtures/BaseTest';
-import { ProductCatalog } from '@pages/ProductCatalog.page';
 import { Page, expect } from '@playwright/test';
+import loginData from '@testData/login.json';
+import productsData from '@testData/products.json';
 
 test.describe('Add Product Tests', () => {
   test.beforeEach(async ({ page, login, productCatalog }) => {
-    await page.goto('https://www.saucedemo.com/');
-    await login.enterUsernameField('standard_user');
-    await login.enterPasswordField('secret_sauce');
+    await page.goto(BASE_URL);
+    await login.enterUsernameField(loginData.validuser.username);
+    await login.enterPasswordField(loginData.validuser.password);
     await login.clickOnLoginButton();
     await expect(productCatalog.productListTitle).toBeVisible();
   });
 
   test('Add Product', async ({ productCatalog, page, cart }) => {
-    await productCatalog.addProductsToCart([
-      'Sauce Labs Backpack',
-      'Sauce Labs Bike Light',
-      'Sauce Labs Onesie',
-    ]);
+    await productCatalog.addProductsToCart(productsData.testScenarios.addThreeProducts);
     await expect(
       page.locator('[data-test="shopping-cart-link"]'),
     ).toContainText('3');
     await productCatalog.clickOnCartLink();
-    await cart.assertProductsInCart([
-      'Sauce Labs Backpack',
-      'Sauce Labs Bike Light',
-      'Sauce Labs Onesie',
-    ]);
+    await cart.assertProductsInCart(productsData.testScenarios.addThreeProducts);
   });
 });

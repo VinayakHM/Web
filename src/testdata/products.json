@@ -1,0 +1,14 @@
+{
+  "products": {
+    "backpack": "Sauce Labs Backpack",
+    "bikeLight": "Sauce Labs Bike Light",
+    "onesie": "Sauce Labs Onesie"
+  },
+  "testScenarios": {
+    "addThreeProducts": [
+      "Sauce Labs Backpack",
+      "Sauce Labs Bike Light",
+      "Sauce Labs Onesie"
+    ]
+  }
+}

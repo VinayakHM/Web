@@ -1,0 +1,10 @@
+{
+  "validuser": {
+    "username": "standard_user",
+    "password": "secret_sauce"
+  },
+  "invaliduser": {
+    "username": "vinayak",
+    "password": "vinayak123"
+  }
+}

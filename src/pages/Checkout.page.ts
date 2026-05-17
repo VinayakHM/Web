@@ -7,6 +7,7 @@ export class Checkout extends Base {
   private lastNameInputField: Locator;
   private postalCodeInputField: Locator;
   private continueButton: Locator;
+  public errorMessage:Locator;
 
   constructor(page: Page) {
     super(page);
@@ -15,6 +16,7 @@ export class Checkout extends Base {
     this.lastNameInputField = this.getLocatorByDatatest('lastName');
     this.postalCodeInputField = this.getLocatorByDatatest('postalCode');
     this.continueButton = this.getLocatorByDatatest('continue');
+    this.errorMessage = this.getLocatorByDatatest('error');
   }
 
   public async enterFirstName(firstName: string): Promise<void> {
